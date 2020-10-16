@@ -1,0 +1,36 @@
+import numpy as pn
+import pandas as pd
+from pandas import Series,DataFrame
+
+# 1.数据结构Series
+
+x=Series([1,2,3,4])
+print(x)
+print(x.values)
+print(x.index)
+
+
+y = Series([1, 2, 3, 4], index = ['a', 'b', 'd', 'c'])
+print(y)
+print(y.index) # Index([u'a', u'b', u'd', u'c'], dtype='object')
+print(y['a']) # 通过行索引来取得元素值：1
+y['d'] = 6 # 通过行索引来赋值
+print(y[['c', 'a', 'd']])# 类似于numpy的花式索引
+print(y[y > 2])  # 类似于numpy的布尔索引
+print('b' in y) # 类似于字典的使用：是否存在该索引：True
+print('e' in y) # False
+
+
+data = {'a':1, 'b':2, 'd':3, 'c':4}
+z = Series(data)
+print(z)
+extend_index = ['a', 'b', 'c', 'e']
+z_1= Series(data, index=extend_index)
+print(z_1)
+print(z+z_1)
+z.name="Letters and numbers"
+z.index.name="letter"
+print(z)
+z.index=['f', 'g', 'h', 'e']
+print(z)
+
