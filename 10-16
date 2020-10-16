@@ -1,5 +1,10 @@
-import numpy as pn
-import pandas as pd
+#以下内容半复制黏贴链接中的代码自学
+#版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。本文链接：https://blog.csdn.net/cxmscb/article/details/54632492
+#没有格式没有完整的注释
+#每一小节需要分开来运行（注释掉或删除其他小节）
+
+import numpy
+import pandas #这一块可能跟据小节不同，需要做调整
 from pandas import Series,DataFrame
 
 # 1.数据结构Series
@@ -34,3 +39,35 @@ print(z)
 z.index=['f', 'g', 'h', 'e']
 print(z)
 
+#2. DataFrame
+
+data = {'state': ['ok', 'ok', 'good', 'bad'],
+        'year': [2000, 2001, 2002, 2003],
+        'pop': [3.7, 3.6, 2.4, 0.9]}
+print(DataFrame(data))
+
+print(DataFrame(data, columns=['year', 'state', 'pop', 'debt']))
+
+x = DataFrame(data,
+              columns=['year', 'state', 'pop', 'debt'],
+              index=['one', 'two', 'three', 'four'])
+print(x)
+print(x['state'])
+print(x.state)  # 可直接用.进行列索引
+
+x['debt'] = 16.5
+print(x)
+
+x.debt = numpy.arange(4)  # 用numpy数组修改元素
+print(x)
+
+val = Series([5,6,7,8],index=['one', 'two', 'five','six']) #用Series修改元素，没有指定的默认数据用NaN
+x.debt=val
+print(x)
+
+x['gain'] = (x.debt > 0)  # 如果debt大于0为True
+print(x)
+
+print(x.columns)
+
+print(x.T)
