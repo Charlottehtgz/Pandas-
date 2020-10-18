@@ -5,7 +5,7 @@
 
 import numpy
 import pandas #这一块可能跟据小节不同，需要做调整
-from pandas import Series,DataFrame
+from pandas import Series, DataFrame, Index
 
 # 1.数据结构Series
 
@@ -71,3 +71,74 @@ print(x)
 print(x.columns)
 
 print(x.T)
+
+
+pdata = {'state':x['state'][0:3], 'pop':x['pop'][0:2]}
+y = DataFrame(pdata)
+print(y)
+
+y.index.name="numbers"
+y.columns.name="message"
+
+print(y)
+
+print(y.values)
+
+#4.索引对象
+
+x = Series(range(3), index=[1,2,3])
+index=x.index
+print(index)
+print(index[0:2])
+try:
+    index[0]='d'
+except:
+    print("can't be changed")
+
+
+index=Index(numpy.arange(3))
+y= Series([1,2,3],index=index)
+print(y)
+
+data = {'pop':[2.4, 2.9],'year':[2001, 2002] }
+z = DataFrame(data)
+print(z)
+
+print(1 in index)
+
+#5. 基本功能
+#5.1 填充
+x = Series([4, 7, 5], index = ['a', 'b', 'c'])
+y = x.reindex(['a', 'b', 'c', 'd'])
+print(y)
+
+x = Series(['blue', 'purple'], index = [0, 2])
+print(x)
+print(x.reindex(range(4), method = 'ffill'))
+
+x=DataFrame(numpy.arange(9).reshape(3,3),index=['a','c','d'],columns=['A', 'B', 'C'])
+print(x)
+
+x=x.reindex(['a','b','c','d'],method='bfill')
+print(x)
+
+states = ['A', 'B', 'C','D']
+x =  x.reindex(columns = states,fill_value = 0)
+print(x)
+
+#5.2 删除
+
+x=Series(numpy.arange(4),index=['a','b','c','d'])
+print(x)
+print(x.drop('a'))
+print(x.drop(['a','b']))
+
+x = DataFrame(numpy.arange(16).reshape((4, 4)),
+                  index = ['a', 'b', 'c', 'd'],
+                  columns = ['A', 'B', 'C', 'D'])
+print(x)
+
+print(x.drop('A',axis=1))
+print(x.drop('b',axis=0))
+print(x.drop(['a', 'b'], axis = 0))
+
